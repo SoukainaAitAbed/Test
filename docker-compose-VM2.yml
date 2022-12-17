@@ -2,8 +2,12 @@ services:
   database:
     image: mysql:latest
     environment:
-      - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=mydatabase
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: database_name
+      MYSQL_USER: login
+      MYSQL_PASSWORD: password
+    command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
+    init_command: "mysql -u root -proot_password < /init.sql"
     volumes:
       - openstack_volume:/var/lib/mysql
     ports:

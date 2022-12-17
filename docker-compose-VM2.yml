@@ -1,0 +1,16 @@
+services:
+  database:
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=mydatabase
+    volumes:
+      - openstack_volume:/var/lib/mysql
+    ports:
+      - "80:443"
+
+volumes:
+  openstack_volume:
+    driver: openstack
+    driver_opts:
+      share_name: openstack_volume
